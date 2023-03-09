@@ -7,20 +7,46 @@ $(function () {
 
   var present = dayjs().format('hh:mm');
   const globalTime = present;
-  const twelveHourTime = dayjs('1/1/1 ' + globalTime).format('hh:mm')
+  const twelveHourTime = dayjs('1/1/1 ' + globalTime).format('hh')
   // twelveHourTime = "02:00 pm"
-  var buttonListEl = $('button')
   var time = document.querySelectorAll('div')
-  var past = present >= time
-  var next = present + 1
-  var future = next
+ 
+ 
+  
   getLocal ()
   console.log(ampm2military(present));
-  console.log(past)
   console.log(twelveHourTime)
-  console.log(present)
+  
   // console.log(next)
   // console.log(future)
+  function updateClock() {
+    var day = dayjs().format('MMM D, YYYY, hh:mm:ss a');
+    $('#1a').text(day);
+    
+    // call this function again in 1000ms
+    setTimeout(updateClock, 1000);
+  }
+  updateClock();
+function timeCheck () {
+  for (let i = 1; i < clock.length; i++) {
+    var currentTaskTime = i
+    if (twelveHourTime > currentTaskTime ) {
+      $(`.description-${[i]}`).css("background","grey")
+    }
+    if (twelveHourTime === currentTaskTime ) {
+      $(`.description-${[i]}`).css("background","red")
+    }
+    if (twelveHourTime < currentTaskTime) {
+      $(`.description-${[i]}`).css("background","green")
+    }
+    
+  }
+
+  setTimeout(timeCheck, 1000);
+};
+  
+timeCheck();
+
   function getLocal () {
   var user = localStorage.getItem(`hourlyTask9`)
   $(`.description-9`).append(user);
@@ -91,7 +117,7 @@ $(function () {
     var hourlyTask9 = $(`.description-13`).val();
     localStorage.setItem(`hourlyTask13`, hourlyTask9);
     console.log(hourlyTasks)
-})
+  })
   $(`.14`).on("click", function(event){
     event.preventDefault();
     var user = localStorage.getItem(`hourlyTask14`)
@@ -99,7 +125,7 @@ $(function () {
     var hourlyTask9 = $(`.description-14`).val();
     localStorage.setItem(`hourlyTask14`, hourlyTask9);
     console.log(hourlyTasks)
-})
+  })
   $(`.15`).on("click", function(event){
     event.preventDefault();
     var user = localStorage.getItem(`hourlyTask15`)
@@ -107,7 +133,7 @@ $(function () {
     var hourlyTask9 = $(`.description-15`).val();
     localStorage.setItem(`hourlyTask15`, hourlyTask9);
     console.log(hourlyTasks)
-})
+  })
   $(`.16`).on("click", function(event){
     event.preventDefault();
     var user = localStorage.getItem(`hourlyTask16`)
@@ -115,7 +141,7 @@ $(function () {
     var hourlyTask9 = $(`.description-16`).val();
     localStorage.setItem(`hourlyTask16`, hourlyTask9);
     console.log(hourlyTasks)
-})
+  })
   $(`.17`).on("click", function(event){
     event.preventDefault();
     var user = localStorage.getItem(`hourlyTask17`)
@@ -123,11 +149,11 @@ $(function () {
     var hourlyTask9 = $(`.description-17`).val();
     localStorage.setItem(`hourlyTask17`, hourlyTask9);
     console.log(hourlyTasks)
-})
-    
-    
-    
-    // TODO: Add a listener for click events on the save button. This code should
+  })
+  
+  
+  
+  // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
   // function? How can DOM traversal be used to get the "hour-x" id of the
@@ -150,20 +176,12 @@ $(function () {
   // ===============================================================================
   
   
-// ========================================================================
-// ========================================================================================
-function updateClock() {
-  var day = dayjs().format('MMM D, YYYY, hh:mm:ss a');
-  $('#1a').text(day);
+  // ========================================================================
+  // ========================================================================================
+  // ========================================================================
+  // event delegation
   
-  // call this function again in 1000ms
-  setTimeout(updateClock, 1000);
-}
-updateClock();
-// ========================================================================
-// event delegation
-
-// ========================================================================================
+  // ========================================================================================
 });
 
 
