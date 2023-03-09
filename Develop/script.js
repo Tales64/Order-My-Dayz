@@ -1,7 +1,7 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-var clock = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,24]
+var clock = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,24,25,26]
 $(function () {
   const ampm2military = ampm => ampm ? dayjs(`1/1/1 ${ampm}`).format("HH:mm:00") : null;
 
@@ -39,7 +39,7 @@ function timeCheck () {
     if (twelveHourTime < currentTaskTime) {
       $(`.description-${[i]}`).css("background","green")
     }
-    
+    console.log(i)
   }
 
   setTimeout(timeCheck, 1000);
