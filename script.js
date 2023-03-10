@@ -5,35 +5,29 @@ var clock = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,24,25,26]
 $(function () {
   const ampm2military = ampm => ampm ? dayjs(`1/1/1 ${ampm}`).format("HH:mm:00") : null;
 
-  var present = dayjs().format('hh:mm');
+  var present = dayjs().format('HH:mm');
   const globalTime = present;
-  const twelveHourTime = dayjs('1/1/1 ' + globalTime).format('hh')
+  const twelveHourTime = dayjs('1/1/1 ' + globalTime).format('HH')
   // twelveHourTime = "02:00 pm"
-  var time = document.querySelectorAll('div')
  
  
   
   getLocal ()
   console.log(ampm2military(present));
   console.log(twelveHourTime)
+  console.log(present)
+
   
-  // console.log(next)
-  // console.log(future)
-  function updateClock() {
-    var day = dayjs().format('MMM D, YYYY, hh:mm:ss a');
+function timeCheck () { 
+   var day = dayjs().format('MMM D, YYYY, hh:mm:ss a');
     $('#1a').text(day);
     
-    // call this function again in 1000ms
-    setTimeout(updateClock, 1000);
-  }
-  updateClock();
-function timeCheck () {
   for (let i = 1; i < clock.length; i++) {
     var currentTaskTime = i
     if (twelveHourTime > currentTaskTime ) {
       $(`.description-${[i]}`).css("background","grey")
     }
-    if (twelveHourTime === currentTaskTime ) {
+    if (twelveHourTime == currentTaskTime ) {
       $(`.description-${[i]}`).css("background","red")
     }
     if (twelveHourTime < currentTaskTime) {
